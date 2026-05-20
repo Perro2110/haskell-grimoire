@@ -552,7 +552,6 @@ prendiString (Regola _ s) = s
 regolaEsempio :: Regola
 regolaEsempio = Regola "Z" "zucchero"
 
-
 genera :: [Regola] -> [Char] -> [Char]
 genera [] str = str
 genera _ [] = []
@@ -563,6 +562,59 @@ genera (r:regole) (a:b)
 -------------------------------------------------------------------------------
 --                input output
 -------------------------------------------------------------------------------
+myecho :: IO ()
+myecho = getChar >>= (\c -> putChar c)
 
-main :: IO ()
-main = putChar 'H'
+myechodup = getChar >>= \c -> putChar c >> putChar c
+
+echotw = myecho >> myecho 
+
+------------------------------------------------------------------------------------------------------------
+--                              Alberi di derivazione                         --
+------------------------------------------------------------------------------------------------------------
+
+
+
+-- leggiInt  :: IO Int
+-- stampaInt :: Int -> IO ()
+
+-- (\x -> x+1)
+-- bind
+-- >>= :: IO a -> (a->IO b) -> IO b
+
+-- return :: a -> IO a
+
+-- >>= ( >>= (leggiInt) (\x -> return x+1) ) stampaInt
+
+
+-- esdo = do {c1 <- getChar;c2<- getChar; return (c1,c2)}
+
+-- esempio do notation 
+
+main = do
+    c <- getChar
+    let c1 = succ c -- uso let e non <- perche non monade dio
+    putChar c1
+    putChar '\n'
+
+
+repeatN :: Int -> IO () -> IO () 
+repeatN 0 a = return ()
+repeatN n a = do
+  a
+  repeatN (n-1) a
+
+
+for xs fa = sequence (map fa xs) >> return ()
+
+main2 = do
+   sequence (map print [1,2])
+
+
+main3 = do
+  putStrLn "quit the program? y/n"
+  ans <- getLine
+  if ans /= "y" then do
+    putStrLn "not quitting"
+    main3
+  else return ()
