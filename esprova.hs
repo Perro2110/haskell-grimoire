@@ -9,8 +9,7 @@ prenditempo tripletta  =  read ( tripletta !! 1 )  :: Int
 prendicosto tripletta  =  read ( tripletta !! 2 )  :: Int
 
 
-returndominatore f s | prenditempo f > prenditempo s = f
-                     | prendicosto f > prendicosto s = f 
+returndominatore f s | (prenditempo f > prenditempo s) && (prendicosto f > prendicosto s) = f 
                      | otherwise = s
 
 controlloallversusall ll = [returndominatore xs s | xs <- ll, s <- ll, xs /= s, returndominatore xs s == xs]
