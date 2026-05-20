@@ -15,7 +15,7 @@ dominata xs (h:ts)  |  (prenditempo xs < prenditempo h) && (prendicosto xs < pre
                     |  otherwise                                                             = dominata xs ts
 
 
-dominantiunici xs = [h | h <- xs, not (dominata h xs)]
+dominantiunici xs = [h | h <- xs, not (dominata h xs)] -- farlo avanti e indietro 
 
 main = do 
     inpStr <- readFile "memory.txt"
