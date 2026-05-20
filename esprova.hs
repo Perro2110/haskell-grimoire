@@ -13,8 +13,6 @@ returndominatore f s | prenditempo f > prenditempo s = f
                      | prendicosto f > prendicosto s = f 
                      | otherwise = s
 
--- per ogni lista controllo se almeno una volta domina su una seconda non se stessa,
--- se lo fa lo aggiungo in output, se non ce gia 
 controlloallversusall ll = [returndominatore xs s | xs <- ll, s <- ll, xs /= s, returndominatore xs s == xs]
 
 uniq [] = []
