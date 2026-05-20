@@ -11,10 +11,8 @@ prendicosto tripletta  =  read ( tripletta !! 2 )  :: Int
 
 
 dominata _ [] = False
-dominata xs (h:ts)
-  | xs == h                                                              = dominata xs ts
-  | (prenditempo h < prenditempo xs) && (prendicosto h < prendicosto xs) = True
-  | otherwise                                                            = dominata xs ts
+dominata xs (h:ts)  |  (prenditempo xs < prenditempo h) && (prendicosto xs < prendicosto h) = True
+                    |  otherwise                                                             = dominata xs ts
 
 
 dominantiunici xs = [h | h <- xs, not (dominata h xs)]
