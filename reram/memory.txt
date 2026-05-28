@@ -1,0 +1,4 @@
+PerKele 100 100
+PerKele 56 41
+AM-Silicon 49 41
+JKR 33 5
