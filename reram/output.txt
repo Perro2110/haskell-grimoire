@@ -1,1 +1,5 @@
-Ram {costruttore = "JKR", tempoaccesso = 33, costoindollar = 5}
+Ram {costruttore = "Drast", tempoaccesso = 28, costoindollar = 35}
+Ram {costruttore = "KRRAM", tempoaccesso = 54, costoindollar = 24}
+Ram {costruttore = "Atlantic", tempoaccesso = 24, costoindollar = 42}
+Ram {costruttore = "ALOE", tempoaccesso = 44, costoindollar = 30}
+Ram {costruttore = "HAL", tempoaccesso = 39, costoindollar = 33}
