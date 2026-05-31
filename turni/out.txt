@@ -1,0 +1,1 @@
+Turno {name = "Spassky", inizio = 8, fine = 17, stato = "OK"}
