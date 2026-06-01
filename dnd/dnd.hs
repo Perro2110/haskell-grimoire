@@ -20,8 +20,7 @@ stessonome a b
                | nome a == nome b   = True 
                | otherwise          = False 
 
-rimuoviDuplicati [] = []
-rimuoviDuplicati (x:xs) = x : rimuoviDuplicati (filter (/= x) xs) -- perdendo tempo qui
+rimuoviDuplicati = foldr (\x acc -> x : filter (/= x) acc) []
 
 chifaazzione mossa [] = []
 chifaazzione mossa (pg:pgs) 
@@ -59,6 +58,7 @@ lemort nomepersonaggio (pg:pgg)
 gamplay [] pgg = pgg
 gamplay (mossa:storico) pgg = gamplay storico (eseguiturno mossa pgg)
 
+partiziona p = foldr (\x (s,n) -> if p x then (x:s,n) else (s,x:n)) ([],[])
 
 main = do 
     inptStr <- readFile "combattimento.txt" 
