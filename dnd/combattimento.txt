@@ -1,0 +1,6 @@
+Drago Arnth -10 fuoco
+Arnth Drago -3 spada
+Drago Luc -4 artiglio
+Drago Arnth -11 artiglio
+Luc Arnth 5 curaFerite
+Arnth Drago -6 spada
