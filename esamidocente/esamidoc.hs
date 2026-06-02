@@ -11,7 +11,7 @@ parse_ris str =
     let [nome,cognome,giorno,mese,anno,voto] = words str
     in Risultati nome cognome (read giorno :: Int) (read mese :: Int) (read anno :: Int) (read voto :: Int)
 
-tuttiesamidix persona risultati = [x| x<-risultati , nome x == nomee persona, cognome x == cognomee persona]
+tuttiesamidix persona risultati = [x | x<-risultati , nome x == nomee persona, cognome x == cognomee persona]
 
 ultimoesamedip person ris = head (reverse (tuttiesamidix person ris))
 
