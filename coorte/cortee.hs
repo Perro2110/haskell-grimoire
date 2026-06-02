@@ -117,8 +117,8 @@ main = do
     let listacorsii = core2 tempoesamidiognistudente corsi
     print listacorsii
 
-    let oo = mediastrana listacorsii
-    print oo
+    let oout = mediastrana listacorsii
+    print oout
 
-    let pupu = map (\s -> unwords [corss s, show (numm s)]) oo
-    putStrLn (unlines pupu)
+    let strdastamp = map (\s -> unwords [corss s, show (numm s)]) oout
+    putStrLn (unlines strdastamp)
