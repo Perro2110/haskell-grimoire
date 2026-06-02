@@ -19,28 +19,22 @@ tuttiesamidix persona risultati = [x| x<-risultati , nome x == nomee persona, co
 
 ultimoesamedip person ris = head (reverse (tuttiesamidix person ris))
 
-
-parso esami = PersonaConSuoStorico (nome (head esami)) (cognome (head esami)) (map voto esami)
-
-
-ll [] = []
-ll (s:storici) = parso s : ll storici
+core2 [] = [PersonaConSuoStorico "pollo" "pollo" [0]]
+core2 (storicodipersonax:storici) = (PersonaConSuoStorico (nome(head storicodipersonax)) (cognome (head storicodipersonax)) (map voto storicodipersonax)):core2 storici
 
 main = do
     inpStr <- readFile "esami.txt"
-    print inpStr
+    --print inpStr
     let liness = lines inpStr
-    print liness
+    --print liness
     let ris = map parse_ris liness
-    print ris
+    --print ris
 
     print "=============================="
     let person = uniqq (map parse_pers liness)
-    print person
+    --print person
 
     -- PRIMA PARTE -- 
-
-    print "===="
     --let testa = head person 
     --let m = ultimoesamedip testa ris
 
@@ -50,8 +44,11 @@ main = do
     let output = (unlines _output)
     putStrLn output
 
+    print "=============================="
     -- SECONDA PARTE -- 
     let storici = map (\p -> tuttiesamidix p ris ) person
-    print storici
-    let lista = ll storici
-    print lista 
+    let _outputfinale = core2 storici
+        
+    let outputfinale = map (\s -> unwords [nn s, cc s, (show (vs s))]) _outputfinale
+    let outputfinalee = (unlines outputfinale)
+    putStrLn outputfinalee
