@@ -6,7 +6,7 @@ parse str =
 
 
 
-inn [] _ = [False]
+inn [] _ = [False]
 inn (a:b) c = any(== a) c : inn b c
 
 aenelturnodib a b = or (inn [inizio a..fine a] [inizio b..fine b])
@@ -14,21 +14,21 @@ aenelturnodib a b = or (inn [inizio a..fine a] [inizio b..fine b])
 
 nontuttiok a = not (and (map (\x -> stato x == "OK") a))
 
-haaavvelenatotutti a b = (and (avsall a b))
+haaavvelenatotutti a b = and (avsall a b) && any (\x -> stato x == "AVV") b
 
-avsall a  [] = [True] 
+avsall a  [] = []
 avsall a (b:xs)
+    | stato b /= "AVV"                                             = avsall a xs
     | aenelturnodib a b && stato b == "AVV" && stato a /= stato b = True: avsall a xs
-    | aenelturnodib a b && stato b == "OK" && stato a == stato b = True: avsall a xs
-    | not(aenelturnodib a b) && stato b == "AVV" = False:avsall a xs
-    | otherwise = [False]
+    | not(aenelturnodib a b) && stato b == "AVV"                  = False: avsall a xs
+    | otherwise                                                   = avsall a xs
 
 
 tuttiinturnoconme x turni = [y| y<-turni,y /= x, aenelturnodib x y]
 
 core [] b = []
 core (x:xs) b
-    | (haaavvelenatotutti x b) && nontuttiok (tuttiinturnoconme x b) && stato x == "OK" = [x] 
+    | (haaavvelenatotutti x b) && nontuttiok (tuttiinturnoconme x b) && stato x == "OK" = x : core xs b
     | otherwise              = core xs b
 
 main = do 
@@ -41,5 +41,3 @@ main = do
     print "aaa"
     let res = core turni turni
     print res
-
-    
