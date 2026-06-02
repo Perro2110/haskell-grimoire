@@ -1,10 +1,6 @@
 data Risultati = Risultati{nome :: String ,cognome :: String ,giorno :: Int ,mese :: Int ,anno:: Int,voto::Int}deriving(Show,Eq)
-
 data Persona = Persona{nomee :: String ,cognomee :: String}deriving(Show,Eq)
-
 data PersonaConSuoStorico = PersonaConSuoStorico{nn::String,cc::String,vs::[Int]}deriving(Show,Eq)
-
-
 
 parse_pers str = let [nome,cognome,giorno,mese,anno,voto] = words str
     in Persona nome cognome 
