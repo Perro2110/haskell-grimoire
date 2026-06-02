@@ -19,7 +19,7 @@ tuttiesamidix persona risultati = [x| x<-risultati , nome x == nomee persona, co
 
 ultimoesamedip person ris = head (reverse (tuttiesamidix person ris))
 
-core2 [] = [PersonaConSuoStorico "pollo" "pollo" [0]]
+core2 [] = []
 core2 (storicodipersonax:storici) = (PersonaConSuoStorico (nome(head storicodipersonax)) (cognome (head storicodipersonax)) (map voto storicodipersonax)):core2 storici
 
 main = do
