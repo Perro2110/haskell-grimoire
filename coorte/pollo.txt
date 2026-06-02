@@ -1,0 +1,4 @@
+Analisi 90.0
+Geometria 45.0
+Informatica 32.5
+Fisica 10.0

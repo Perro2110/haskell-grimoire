@@ -1,0 +1,6 @@
+Analisi 121 90 Rossi
+Geometria 121 100 Rossi
+Informatica 121 125 Rossi
+Geometria 140 80 Verdi
+Informatica 140 120 Verdi
+Fisica 140 130 Verdi
