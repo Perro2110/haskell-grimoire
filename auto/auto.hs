@@ -43,7 +43,7 @@ quantitipox (auto:autos) tipox num
 _controllodirichieste [] autos          = [True]
 _controllodirichieste (tipo:tipi) autos 
                                         | (numAutoRichieste tipo) >= (quantitipox autos (identificativoTipo tipo) 0) = True:_controllodirichieste tipi autos 
-                                        | otherwise                                                                = False:_controllodirichieste tipi autos 
+                                        | otherwise                                                                  = False:_controllodirichieste tipi autos 
 
 
 
