@@ -10,6 +10,9 @@ prendimassimoadomandaX (stats:statss) x dummy
                                                 | ( (voti dummy) !! x ) <= ( (voti stats) !! x ) = prendimassimoadomandaX statss x stats 
                                                 | otherwise                                      = prendimassimoadomandaX statss x dummy 
 
+-- prendimassimoadomandaX stats x dummy =
+--     foldr (\s acc -> if (voti s !! x) >= (voti acc !! x) then s else acc) dummy stats
+
 datadomandaXdiamoClassifica [] x = []
 datadomandaXdiamoClassifica statistiche x = prendimassimoadomandaX statistiche x (head statistiche):datadomandaXdiamoClassifica [y | y <- statistiche, y /= (prendimassimoadomandaX statistiche x (head statistiche))] x 
 
