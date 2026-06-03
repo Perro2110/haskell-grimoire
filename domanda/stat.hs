@@ -18,15 +18,12 @@ toString classificazza = ("Domanda: "++show (numeroDomanda classificazza))++"\n"
 main = do
     inpstr <- readFile "stast.txt" 
     let liness = lines inpstr
-    --print liness
-    let listaperognimerda = map words liness
-    --print listaperognimerda
-    let statistiche = map parse listaperognimerda
-    -- print statistiche
-    let numDomande = length (voti (head statistiche))
-    --print numDomande
 
-    let numeroDomande = [0..(numDomande-1)]
+    let listaperognidomanda = map words liness
+
+    let statistiche = map parse listaperognidomanda
+    let numDomande = length (voti (head statistiche))
+    let numeroDomande = [0..(numDomande-1)] -- lista di domande 
     
     let sol1 = map (\nd -> datadomandaXdiamoClassifica statistiche nd) numeroDomande
     let solzipposa = zip numeroDomande sol1
