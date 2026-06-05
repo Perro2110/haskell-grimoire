@@ -6,8 +6,8 @@ parse str =
 
 a_domminaSu_b a b 
                     | (tempoAccesso a) <=  (tempoAccesso b) &&  (costoInDollari a) <  (costoInDollari b)    = True 
-                    | (costoInDollari a) <=  (costoInDollari b)  &&  (tempoAccesso a) <  (tempoAccesso b)  = True 
-                    | otherwise                                 = False 
+                    | (costoInDollari a) <=  (costoInDollari b)  &&  (tempoAccesso a) <  (tempoAccesso b)   = True 
+                    | otherwise                                                                             = False 
 
 vienemaidominato ram rams = (or (map (\r -> a_domminaSu_b r ram) rams))
 
