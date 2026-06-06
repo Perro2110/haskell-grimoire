@@ -3,13 +3,6 @@ data Statistiche = Statistiche {cognome :: String, risposte :: [Float]}deriving(
 
 parse (c:r) = Statistiche c (map read r)
 
-
--- dammiMax [] id statistica        = statistica
--- dammiMax (s:stats) id statistica 
---                                  | ((risposte statistica) !! id ) <= ((risposte s) !! id) = dammiMax stats id s 
---                                  | otherwise                                              = dammiMax stats id statistica 
--- 
-
 dammiMax stats id = foldr (\s acc -> if (((risposte acc) !! id ) <= ((risposte s) !! id)) then s else acc) (head stats) stats
 
 

@@ -80,7 +80,3 @@ main = do
     let ccount = _controllodirichieste tipi autodaprodurre
     let veritas = and ccount
     if veritas then print "CONFERMO POSSO FARNE NUMERO X" else print "NON POSSO FARNE TROPPO DI UN TIPO !!"
-
-
-
-
