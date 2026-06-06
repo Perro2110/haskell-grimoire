@@ -17,10 +17,6 @@ _a_inturno_con_b a b = any (\x -> any (== x) b) a --foldr (\x acc -> if (any (==
 
 a_inturno_con_b a b = (_a_inturno_con_b [(inizio a)..(fine a)] [(inizio b)..(fine b)])
 
-
-divAvvOk l = foldr(\x (s,n) -> if not(avvelentao x) then (x:s,n) else (s,x:n)) ([],[]) l
-
-
 -- _a_inturno_con_tutti_i_vari_b a []                        = [True]
 -- _a_inturno_con_tutti_i_vari_b a (b:bs) 
 --                                     | a_inturno_con_b a b = True:_a_inturno_con_tutti_i_vari_b a bs
@@ -29,6 +25,9 @@ divAvvOk l = foldr(\x (s,n) -> if not(avvelentao x) then (x:s,n) else (s,x:n)) (
 -- a_inturno_con_tutti_i_vari_b a b = and(_a_inturno_con_tutti_i_vari_b a b)
 --
 a_inturno_con_tutti_i_vari_b a b = all (\x -> a_inturno_con_b a x) b -- foldr (\x acc -> if (a_inturno_con_b a x) && acc then True else False) True b 
+
+
+divAvvOk l = foldr(\x (s,n) -> if not(avvelentao x) then (x:s,n) else (s,x:n)) ([],[]) l
 
 
 -- se sei tu ok e sei stato con tutti avv allora sei il cattivo 
