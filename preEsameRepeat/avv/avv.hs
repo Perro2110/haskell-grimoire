@@ -13,7 +13,7 @@ avvelentao t
 --                        | any (== a) b = True:_a_inturno_con_b as b 
 --                        | otherwise    = False:_a_inturno_con_b as b 
 ---
-_a_inturno_con_b a b = foldr (\x acc -> if (any (== x) b || acc) then True else False ) False a
+_a_inturno_con_b a b = any (\x -> any (== x) b) a --foldr (\x acc -> if (any (== x) b || acc) then True else False ) False a
 
 a_inturno_con_b a b = (_a_inturno_con_b [(inizio a)..(fine a)] [(inizio b)..(fine b)])
 
@@ -28,8 +28,7 @@ divAvvOk l = foldr(\x (s,n) -> if not(avvelentao x) then (x:s,n) else (s,x:n)) (
 -- 
 -- a_inturno_con_tutti_i_vari_b a b = and(_a_inturno_con_tutti_i_vari_b a b)
 --
-
-a_inturno_con_tutti_i_vari_b a b = foldr (\x acc -> if (a_inturno_con_b a x) && acc then True else False) True b 
+a_inturno_con_tutti_i_vari_b a b = all (\x -> a_inturno_con_b a x) b -- foldr (\x acc -> if (a_inturno_con_b a x) && acc then True else False) True b 
 
 
 -- se sei tu ok e sei stato con tutti avv allora sei il cattivo 
@@ -38,8 +37,8 @@ a_inturno_con_tutti_i_vari_b a b = foldr (\x acc -> if (a_inturno_con_b a x) && 
 --cercoBastardo (sano:sani) avv 
 --                            | (a_inturno_con_tutti_i_vari_b sano avv)  = sano:cercoBastardo sani avv 
 --                            | otherwise                                = cercoBastardo sani avv 
-
-cercoBastardo sani avv = foldr (\x acc -> if (a_inturno_con_tutti_i_vari_b x avv) then x:acc else acc) [] sani
+-- cercoBastardo sani avv = foldr (\x acc -> if (a_inturno_con_tutti_i_vari_b x avv) then x:acc else acc) [] sani
+cercoBastardo sani avv = [bastardo | bastardo <- sani, (a_inturno_con_tutti_i_vari_b bastardo avv)]
 
 toString bastardo = "dr. " ++ (cognome bastardo) ++ " che ha lavoprato dalle: " ++ (show (inizio bastardo)) ++ " alle: "++(show (fine bastardo))
 
