@@ -6,7 +6,6 @@ parse (c:r) = Statistiche c (map read r)
 dammiMax stats id = foldr (\s acc -> if (((risposte acc) !! id ) <= ((risposte s) !! id)) then s else acc) (head stats) stats
 
 
-
 daiclassificatatoid [] idD = []                                                 -- averi potuto usare anche una filter rispetto list comprehensions
 daiclassificatatoid (s:stats) idD = (dammiMax (s:stats) idD): daiclassificatatoid [stati | stati <- (s:stats), stati /= (dammiMax (s:stats) idD)] idD
 
