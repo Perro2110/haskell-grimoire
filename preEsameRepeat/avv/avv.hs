@@ -31,12 +31,15 @@ divAvvOk l = foldr(\x (s,n) -> if not(avvelentao x) then (x:s,n) else (s,x:n)) (
 
 a_inturno_con_tutti_i_vari_b a b = foldr (\x acc -> if (a_inturno_con_b a x) && acc then True else False) True b 
 
+
 -- se sei tu ok e sei stato con tutti avv allora sei il cattivo 
 
-cercoBastardo [] avv = []
-cercoBastardo (sano:sani) avv 
-                            | (a_inturno_con_tutti_i_vari_b sano avv)  = sano:cercoBastardo sani avv 
-                            | otherwise                                = cercoBastardo sani avv 
+--cercoBastardo [] avv = []
+--cercoBastardo (sano:sani) avv 
+--                            | (a_inturno_con_tutti_i_vari_b sano avv)  = sano:cercoBastardo sani avv 
+--                            | otherwise                                = cercoBastardo sani avv 
+
+cercoBastardo sani avv = foldr (\x acc -> if (a_inturno_con_tutti_i_vari_b x avv) then x:acc else acc) [] sani
 
 toString bastardo = "dr. " ++ (cognome bastardo) ++ " che ha lavoprato dalle: " ++ (show (inizio bastardo)) ++ " alle: "++(show (fine bastardo))
 
