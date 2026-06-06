@@ -1,0 +1,3 @@
+Bianchi 7 10 5 8
+Rossi 5 6 6 4
+Verdi 6 4 4 7 
