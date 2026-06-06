@@ -7,23 +7,29 @@ avvelentao t
             | (stato t) == "AVV" = True 
             | otherwise          = False
 
-_a_inturno_con_b [] b = [False]
-_a_inturno_con_b (a:as) b 
-                        | any (== a) b = True:_a_inturno_con_b as b 
-                        | otherwise    = False:_a_inturno_con_b as b 
+---
+--_a_inturno_con_b [] b = [False]
+--_a_inturno_con_b (a:as) b 
+--                        | any (== a) b = True:_a_inturno_con_b as b 
+--                        | otherwise    = False:_a_inturno_con_b as b 
+---
+_a_inturno_con_b a b = foldr (\x acc -> if (any (== x) b || acc) then True else False ) False a
 
-a_inturno_con_b a b = or (_a_inturno_con_b [(inizio a)..(fine a)] [(inizio b)..(fine b)])
+a_inturno_con_b a b = (_a_inturno_con_b [(inizio a)..(fine a)] [(inizio b)..(fine b)])
 
 
 divAvvOk l = foldr(\x (s,n) -> if not(avvelentao x) then (x:s,n) else (s,x:n)) ([],[]) l
 
 
-_a_inturno_con_tutti_i_vari_b a []                        = [True]
-_a_inturno_con_tutti_i_vari_b a (b:bs) 
-                                    | a_inturno_con_b a b = True:_a_inturno_con_tutti_i_vari_b a bs
-                                    | otherwise           = False:_a_inturno_con_tutti_i_vari_b a bs
+-- _a_inturno_con_tutti_i_vari_b a []                        = [True]
+-- _a_inturno_con_tutti_i_vari_b a (b:bs) 
+--                                     | a_inturno_con_b a b = True:_a_inturno_con_tutti_i_vari_b a bs
+--                                     | otherwise           = False:_a_inturno_con_tutti_i_vari_b a bs
+-- 
+-- a_inturno_con_tutti_i_vari_b a b = and(_a_inturno_con_tutti_i_vari_b a b)
+--
 
-a_inturno_con_tutti_i_vari_b a b = and(_a_inturno_con_tutti_i_vari_b a b)
+a_inturno_con_tutti_i_vari_b a b = foldr (\x acc -> if (a_inturno_con_b a x) && acc then True else False) True b 
 
 -- se sei tu ok e sei stato con tutti avv allora sei il cattivo 
 
