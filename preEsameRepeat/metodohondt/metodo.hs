@@ -16,10 +16,11 @@ mspart [x] = [x]
 mspart ps = mergep (mspart left) (mspart right) where (left,right) = splitAt (div (length ps) 2) ps
 
 
-_inchepos n [] = [False]
-_inchepos n (l:lista)
-                    | n == l     = True:_inchepos n lista
-                    | otherwise  = False:_inchepos n lista
+--_inchepos n [] = [False]
+--_inchepos n (l:lista)
+--                    | n == l     = True:_inchepos n lista
+--                    | otherwise  = False:_inchepos n lista
+_inchepos n lista = foldr (\x acc -> if n == x then True:acc else False:acc) [False] lista
 
 _trovaTrue lista n 
                     | lista !! n = n
