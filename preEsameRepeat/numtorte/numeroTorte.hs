@@ -23,9 +23,6 @@ main = do
     let ric = map parse ricetta
     let ing = map parse ingredienti
 
-    --print ric 
-    --print ing
-    
     let inggg = map (\ingg -> quantorichiesto ric ingg) [i | i<-ing , richiestoinricettaelementoconnomex ric i]
     let out = "\nPuo fare "++(show (minnimo inggg))++" torte\n"
     putStrLn out
