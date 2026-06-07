@@ -1,0 +1,37 @@
+8 gennaio 2026
+
+ESERCIZIO 1 (punti 15)
+
+In un gioco di ruolo, un gruppo di avventurieri ha deciso di attaccare un drago.
+Ciascun personaggio (avventuriero o drago) ha 20 punti vita; quando i punti vita scendono a zero (o sotto), il personaggio muore.
+
+Le azioni avvenute nella battaglia sono riportate nel file di testo combattimento.txt.
+Per ciascuna azione, il file contiene:
+- il nome del personaggio che effettua l'azione: stringa, senza spazi
+- il nome del personaggio che subisce l'azione: stringa, senza spazi
+- la modifica di punti vita (intero): ogni azione causa un aumento o una diminuzione di punti vita del personaggio che subisce l'azione; questo valore (che puo` essere positivo o negativo) riporta di quanto aumenta o diminuisce il numero di punti vita del personaggio che subisce l'azione
+- il tipo di azione: stringa, senza spazi.
+
+
+Si scriva un programma Haskell che visualizza i punti vita di tutti i personaggi alla fine del combattimento.
+In particolare, bisogna tener conto del fatto che le azioni svolte da personaggi gia` morti non hanno alcun effetto.
+
+Ad esempio, se il file combattimento.txt contiene:
+
+Drago Arnth -10 fuoco
+Arnth Drago -3 spada
+Drago Luc -4 artiglio
+Drago Arnth -11 artiglio
+Luc Arnth 5 curaFerite
+Arnth Drago -6 spada
+
+allora Arnth muore alla terza azione (va a -1 punti vita), per cui le due azioni successive (cura ferite di Luc ad Arnth e colpo di spada da Arnth al Drago) in realta` non hanno effetto: Arnth non guadagna i 5 punti vita del cura ferite e il Drago non subisce i 6 danni dalla spada di Arnth.
+
+Nel file di esempio, il programma dovra` mostrare:
+Arnth -1
+Drago 17
+Luc 16
+
+
+REQUISITO PER ULTERIORI PUNTI (punti 4)
+In tutti i punti in cui è possibile, si usino funzioni di ordine superiore.
