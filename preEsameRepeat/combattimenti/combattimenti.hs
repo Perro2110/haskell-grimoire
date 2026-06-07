@@ -33,26 +33,28 @@ combattimento turni personaggi = foldl (\acc t -> if (azioneValida t acc) then (
 --------------------------------------------------------------------------------
 
 uniqStr personaggiconripetizioni = foldr (\x acc -> x:filter(/=x) acc) [] personaggiconripetizioni
+toString p = (nome p) ++ " " ++ (show (puntiVita p))
 
 main = do
-    -------------Estraggo info dal file 
+    --- Estraggo info dal file 
     inpStr <- readFile "combattimento.txt"
     let liness = lines inpStr
 
-    -------------Genero turni 
+    --- Genero turni 
     let turni = map parse liness
-    print "===Turni==="
-    print turni 
+    --print "===Turni==="
+    --print turni 
 
-    ------------Da turni a personaggi 
+    --- Da turni a personaggi 
     let casters   = map caster turni  
     let obiettivi = map target turni 
     let nomipersonaggiconripetizioni = obiettivi++casters
     let uniqnomipersonaggi = uniqStr nomipersonaggiconripetizioni
     let personaggi = map (\x -> Personaggio x 20) uniqnomipersonaggi
-    print "===Personaggi==="
-    print personaggi
-    print "================"
+    --print "===Personaggi==="
+    --print personaggi
+    --print "================"
 
     let personaggiPostCombattimento = combattimento turni personaggi
-    print personaggiPostCombattimento
+    let outStr = map toString personaggiPostCombattimento
+    putStrLn (unlines outStr)
