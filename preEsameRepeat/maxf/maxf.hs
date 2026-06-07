@@ -1,0 +1,1 @@
+maxf f lista = foldr (\x acc -> if (f x) >= (f acc) then x else acc) (head lista) lista 
