@@ -5,18 +5,6 @@ parse (numpart,voti) = Partito numpart voti
 dHondt v [] = []
 dHondt v (j:js) = v / j : dHondt v js
 
-
-merge xs [] = xs 
-merge [] xs = xs
-merge (x:xs) (y:ys) 
-            | x >= y    = x:merge xs (y:ys)
-            | otherwise = y:merge (x:xs) ys
-
-ms [] = []
-ms [x] = [x]
-ms xs = merge (ms left) (ms right) where (left,right) = splitAt (div (length xs) 2) xs
-
-
 mergep xs [] = xs 
 mergep [] xs = xs
 mergep (x:xs) (y:ys) 
