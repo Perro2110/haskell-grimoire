@@ -1,5 +1,4 @@
 data Partito = Partito {numero :: Int, listaVoti :: [Float]}deriving (Show,Eq)
-data Seggi = Seggi {numeroPart :: Int, numeroSeggi :: Int}
 
 parse (numpart,voti) = Partito numpart voti 
 
