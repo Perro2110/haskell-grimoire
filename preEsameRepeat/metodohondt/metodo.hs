@@ -57,7 +57,7 @@ main = do
     let voti        = [100000,80000,30000,20000] 
     let num_partiti = length voti 
     --print num_partiti
-    let votiperpartito =  (map (\v -> ms (take num_seggi (dHondt v [1..]))) voti)
+    let votiperpartito =  (map (\v -> take num_seggi (dHondt v [1..])) voti)
     print votiperpartito 
     let partiti = map parse (zip [1..] votiperpartito)
     let listadasom1 = core partiti num_seggi
