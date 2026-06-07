@@ -1,0 +1,4 @@
+Burro 500
+Farina 1000
+Latte 1000
+Zucchero 700
