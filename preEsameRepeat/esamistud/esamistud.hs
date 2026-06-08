@@ -30,9 +30,9 @@ parsestr2 tt = foldr (\(x,y) acc -> (x ++ " "++ (show y) ++ "\n" ++ acc)) [] tt
 
 main = do 
     inpStr <- readFile "coorte.txt"
-    print "================="
-    print "         es 1    "
-    print "================="
+    print "=========================="
+    print "           ES 1           "
+    print "=========================="
     print "Inserire cognome idiota: "
     let liness = lines inpStr
     let storicoEsami = map parse liness
@@ -42,9 +42,9 @@ main = do
     let tt = core t
     putStrLn (parsestr1 tt)
 
-    print "================="
-    print "         es 2    "
-    print "================="
+    print "=========================="
+    print "           ES 2           "
+    print "=========================="
 
     let esami = map (\s -> InfoDatoNome s 0 0) (uniq (map nomecorso storicoEsami))
     let nomipersone = uniq (map cognomestudente storicoEsami)
