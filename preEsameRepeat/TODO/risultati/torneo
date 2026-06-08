@@ -1,0 +1,23 @@
+I risultati delle partite di un torneo di calcio sono riportati nel file partite.txt. Ogni riga contiene:
+
+• squadra di casa: stringa
+• gol segnati dalla squadra di casa: intero
+• squadra ospite: stringa
+• gol segnati dalla squadra ospite: intero
+
+Si scriva un programma Haskell che calcoli e visualizzi la classifica del torneo.
+Per ogni squadra vanno mostrati: nome, punti totali (3 per vittoria, 1 per pareggio, 0 per sconfitta) e differenza reti.
+La classifica deve essere ordinata per punti decrescenti; in caso di parità di punti, per differenza reti decrescente.
+
+es 
+Inter 0 Roma 0
+Roma 1 Juventus 1
+Roma 1 Juventus 1
+Milan 3 Inter 1
+Juventus 2 Milan 1
+
+output
+Juventus   5  1
+Milan      3  1
+Roma       3  0
+Inter      1 -2
