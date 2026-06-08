@@ -23,10 +23,7 @@ flat l = foldr (++) [] l
 
 prendituttinome esami nome = [t | t <- esami, fst t == nome]
 
-
 sommi l = foldr(\(n,x) acc -> ((fst acc) + x,(snd acc)+1)) (0,0) l
-
-foo l = map (\x -> (read(show (fst x)) :: Float)/(read(show (snd x)) :: Float)) l 
 
 parsestr1 tt = foldr (\(x,y) acc -> (x ++ " "++ (show y) ++ "\n" ++ acc)) [] tt
 parsestr2 tt = foldr (\(x,y) acc -> (x ++ " "++ (show y) ++ "\n" ++ acc)) [] tt
