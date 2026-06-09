@@ -35,6 +35,9 @@ d drone bordideluniverso = not(prendiy drone <= 0)
 
 autopilot drone movimenti bordideluniverso = foldl (\d movimento-> moves movimento d bordideluniverso) drone movimenti
 
+tracciato drone [] bordideluniverso = []
+tracciato drone (m:movimenti) bordideluniverso = (autopilot drone [m] bordideluniverso):(tracciato (autopilot drone [m] bordideluniverso) movimenti bordideluniverso)
+
 main = do 
     inpStrp <- readFile "drone.txt"
 
@@ -54,9 +57,7 @@ main = do
     
     let bordideluniverso = (bordox,bordoy)
     let newd = autopilot drone percorso bordideluniverso
-    print newd
+    print (tracciato drone percorso bordideluniverso)
    
-    let movimenti = map (\mov -> moves mov drone bordideluniverso) percorso
-    print movimenti
-    print "END"
+
     
