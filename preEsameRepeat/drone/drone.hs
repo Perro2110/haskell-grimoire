@@ -1,6 +1,4 @@
 data Drone = Drone {pos :: (Int,Int),live :: Bool}deriving(Show)
-data DroneConStorico = DroneConStorico {poss :: (Int,Int)}deriving(Show)
-
 data Meteorite = Meteorite {posm :: (Int,Int)}deriving(Show)
 
 parsemeteoriti str = let [a,b] = words str 
