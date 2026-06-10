@@ -53,7 +53,8 @@ d drone bordideluniverso meteroiti = not(prendiy drone <= 0) && (all (/= (prendi
 autopilot drone movimenti bordideluniverso meteroiti = foldl (\d movimento-> moves movimento d bordideluniverso meteroiti) drone movimenti
 
 tracciato drone [] bordideluniverso meteroiti = []
-tracciato drone (m:movimenti) bordideluniverso meteroiti = (autopilot drone [m] bordideluniverso meteroiti):(tracciato (autopilot drone [m] bordideluniverso meteroiti) movimenti bordideluniverso meteroiti)
+tracciato drone (m:movimenti) bordideluniverso meteroiti = (moves m drone bordideluniverso meteroiti):(tracciato (moves m drone bordideluniverso meteroiti) movimenti bordideluniverso meteroiti)
+
 
 manathan (x,y) (xx,yy) = (x - xx) + (y - yy) 
 

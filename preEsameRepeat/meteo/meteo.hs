@@ -30,14 +30,14 @@ flat lista = foldr (++) [] lista
 
 _eanonima [] ele       = [False]
 _eanonima (l:list) ele 
-                    |  l == ele   = False:_eanonima list l
-                    |  l >= ele+5 = True:_eanonima list l
-                    |  otherwise  = False:_eanonima list l
+                    |   l >= ele+5 = True:_eanonima list l
+                    |   otherwise  = False:_eanonima list l
 
 verificaanomalia ls = or(_eanonima ls (head ls))
 
-prenditemperatureadorariox [] orario = []
-prenditemperatureadorariox (m:misure) orario = (temperature m) !! orario : prenditemperatureadorariox misure orario
+--prenditemperatureadorariox [] orario = []
+--prenditemperatureadorariox (m:misure) orario = (temperature m) !! orario : prenditemperatureadorariox misure orario
+prenditemperatureadorariox mss orario = foldr (\m acc -> (temperature m) !! orario:acc) [] mss
 
 
 main = do 
@@ -56,14 +56,16 @@ main = do
     putStrLn ("con media in C:" ++ " " ++(show mediaa))
     let numore = length (temperature (head misure))
     let p = map media (map (\o-> prenditemperatureadorariox misure o) [0..(numore-1)])
-    let critiche = map (\(torario,o) -> if (torario > mediaa) then (show o) else []) (zip p [1..])
-    putStrLn (unlines((filter (/="") critiche)))
+    let critiche = map (\(torario,o) -> if (torario > mediaa) then (show o)++" " else []) (zip p [1..])
+    putStr (unlines((filter (/="") critiche)))
+   
     print "2. Ore critiche per luogo"
     putStrLn ("con media in C:" ++ " " ++(show mediaa))
     let temperatureinvariorari =  map (\m-> (nomeCitta m,(zip [1..] (temperature m)))) misure 
     let valorimag = map (\xx -> prendiorecritiche xx mediaa) temperatureinvariorari 
     putStrLn (unlines((map outs2 valorimag)))
+    
     --print valorimag
     print "2b. Stazioni anomale"
-    let anonime = map (\m-> if (verificaanomalia (temperature m)) then nomeCitta m else "") misure
-    if (verificaanomalia (flat (map temperature misure))) then (putStrLn (unlines(anonime))) else print "nessuna anomala"
+    let anomalie = map (\m-> if (verificaanomalia (temperature m)) then nomeCitta m else "") misure
+    if (verificaanomalia (flat (map temperature misure))) then (putStrLn (unlines(anomalie))) else print "nessuna anomala"
