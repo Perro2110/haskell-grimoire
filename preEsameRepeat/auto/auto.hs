@@ -17,6 +17,8 @@ quantiHanno tipiAutovettura c = foldr (\t acc -> if c t then acc+1 else acc) 0 t
 --                                                        |  otherwise = False:_controllo tipiautovetture (tail seqAuto) numAutoCons nonPiuDiN condizione 
 --
 --controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione = and (_controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione)
+
+
 --------------------------------------------------------------------------------
 --- Versione con foldr 
 --controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione = foldr (\s acc -> if (acc && ((quantiHanno (map (\x -> tipoDatoId x tipiautovetture) (map (\s -> read s ::Int) (take numAutoCons seqAuto))) condizione) <= nonPiuDiN)) then True else False) True seqAuto
