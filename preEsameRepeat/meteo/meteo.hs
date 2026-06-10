@@ -1,5 +1,6 @@
 -- 16:10
--- 17:20
+-- 17:50
+
 data Misura = Misura{nomeCitta::String,temperature::[Int]}deriving(Show,Eq)
 
 parse misurazioni = (Misura (head misurazioni) (map (\x -> read x ::Int) (tail misurazioni)))
