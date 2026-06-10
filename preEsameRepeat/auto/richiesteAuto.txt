@@ -1,0 +1,4 @@
+1 True True 7 
+2 False True 8 
+3 True False 15 
+4 False False 20
