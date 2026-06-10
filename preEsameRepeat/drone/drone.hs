@@ -1,18 +1,21 @@
 data Drone = Drone {pos :: (Int,Int),live :: Bool}deriving(Show)
 data Meteorite = Meteorite {posm :: (Int,Int)}deriving(Show)
 
+
+
+--------------------------------------------------------------------------------
+--                          GENERATORE STRUCT ?                               --
+--------------------------------------------------------------------------------
 parsemeteoriti str = let [a,b] = words str 
                      in Meteorite ((read a ::Int),(read b :: Int))
 
+-- Getter comodi 
 prendix drone = fst (pos drone)
 prendiy drone = snd (pos drone)
 
-keepLive drone = live drone
-
-seineibordideuniverso bordideluniverso drone 
-    | ((prendix drone) > (fst bordideluniverso) || (prendiy drone) > (snd bordideluniverso)) = False 
-    | otherwise = True 
-    
+--------------------------------------------------------------------------------
+--                          MOVIMENTO ?                                       --
+--------------------------------------------------------------------------------
 
 right drone = Drone ((prendix drone) +1 ,(prendiy drone)) True
 left drone = Drone ((prendix drone) -1 ,(prendiy drone)) True
@@ -27,6 +30,15 @@ moves str drone bordideluniverso meteroiti
             | str == "R" = if (r drone bordideluniverso meteroiti) then (right drone) else (Drone (-1,-1) False)
             | otherwise  = (Drone (-1,-1) False)
 
+--------------------------------------------------------------------------------
+--                          PUO ?                                             --
+--------------------------------------------------------------------------------
+keepLive drone = live drone
+
+seineibordideuniverso bordideluniverso drone 
+    | ((prendix drone) > (fst bordideluniverso) || (prendiy drone) > (snd bordideluniverso)) = False 
+    | otherwise = True 
+
 
 r drone bordideluniverso meteroiti = not(prendix drone >= (fst bordideluniverso)) && (all (/= ((prendix drone +1),(prendiy drone))) (map posm meteroiti))
 l drone bordideluniverso meteroiti = not(prendix drone <= 0) && (all (/= ((prendix drone -1),prendiy drone)) (map posm meteroiti))
@@ -34,12 +46,18 @@ l drone bordideluniverso meteroiti = not(prendix drone <= 0) && (all (/= ((prend
 u drone bordideluniverso meteroiti = not(prendiy drone >= (snd bordideluniverso)) && (all (/= (prendix drone,(prendiy drone)+1)) (map posm meteroiti))
 d drone bordideluniverso meteroiti = not(prendiy drone <= 0) && (all (/= (prendix drone,(prendiy drone)-1)) (map posm meteroiti))
 
+--------------------------------------------------------------------------------
+--                      RICHIESTE                                             --
+--------------------------------------------------------------------------------
+
 autopilot drone movimenti bordideluniverso meteroiti = foldl (\d movimento-> moves movimento d bordideluniverso meteroiti) drone movimenti
 
 tracciato drone [] bordideluniverso meteroiti = []
 tracciato drone (m:movimenti) bordideluniverso meteroiti = (autopilot drone [m] bordideluniverso meteroiti):(tracciato (autopilot drone [m] bordideluniverso meteroiti) movimenti bordideluniverso meteroiti)
 
 manathan (x,y) (xx,yy) = (x - xx) + (y - yy) 
+
+
 
 main = do 
     inpStrp <- readFile "drone.txt"
