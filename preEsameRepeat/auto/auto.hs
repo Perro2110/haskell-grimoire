@@ -15,7 +15,7 @@ quantiHanno tipiAutovettura c = foldr (\t acc -> if c t then acc+1 else acc) 0 t
 
 tipiautovettureinseq seq tipiautovetture = map (\s -> tipoDatoId (read s :: Int) tipiautovetture) seq
 
---- Versione esplicita, se implementavo window maybe avrei potuto fare tutto con all 
+--------------------------------------------------------------------------------
 _controllo :: (Ord t, Num t) => [TipoAutoVettura] -> [String] -> Int -> t -> (TipoAutoVettura -> Bool) -> [Bool]
 _controllo tipiautovetture [] numAutoCons nonPiuDiN condizione = [True]
 _controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione 
