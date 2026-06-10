@@ -3,34 +3,39 @@
 data TipoAutoVettura = TipoAutoVettura{identificativo::Int,haAriaCondizionata::Bool,haTettuccio::Bool,numRichiesto::Int}deriving(Show,Eq)
 data QuantiOgniTipo = QuantiOgniTipo{idd :: Int, num :: Int}deriving(Show,Eq)
 
+parse :: [Char] -> TipoAutoVettura
 parse str = let [id,har,hat,num] = words str 
             in TipoAutoVettura (read id :: Int) (read har:: Bool) (read hat::Bool) (read num::Int)
 
+tipoDatoId :: Int -> [TipoAutoVettura] -> TipoAutoVettura
 tipoDatoId id tipiautovetture = head [a | a<-tipiautovetture, (identificativo a) == id]
 
+quantiHanno :: (Foldable t1, Num b) => t1 t2 -> (t2 -> Bool) -> b
 quantiHanno tipiAutovettura c = foldr (\t acc -> if c t then acc+1 else acc) 0 tipiAutovettura
 
---- Versione esplicita
---_controllo tipiautovetture [] numAutoCons nonPiuDiN condizione = [True]
---_controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione 
---                                                        |  (quantiHanno (map (\x -> tipoDatoId x tipiautovetture) (map (\s -> read s ::Int) (take numAutoCons seqAuto))) condizione) <= nonPiuDiN = True:_controllo tipiautovetture (tail seqAuto) numAutoCons nonPiuDiN condizione 
---                                                        |  otherwise = False:_controllo tipiautovetture (tail seqAuto) numAutoCons nonPiuDiN condizione 
---
---controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione = and (_controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione)
+tipiautovettureinseq seq tipiautovetture = map (\s -> tipoDatoId (read s :: Int) tipiautovetture) seq
 
+--- Versione esplicita, se implementavo window maybe avrei potuto fare tutto con all 
+_controllo :: (Ord t, Num t) => [TipoAutoVettura] -> [String] -> Int -> t -> (TipoAutoVettura -> Bool) -> [Bool]
+_controllo tipiautovetture [] numAutoCons nonPiuDiN condizione = [True]
+_controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione 
+                                                        |  ((quantiHanno (map (\x -> tipoDatoId x tipiautovetture) (map (\s -> read s ::Int) (take numAutoCons seqAuto))) condizione) <= nonPiuDiN) = True:_controllo tipiautovetture (tail seqAuto) numAutoCons nonPiuDiN condizione 
+                                                        |  otherwise                                                                                                                                = False:_controllo tipiautovetture (tail seqAuto) numAutoCons nonPiuDiN condizione 
 
+controllo :: (Ord t, Num t) => [TipoAutoVettura] -> [String] -> Int -> t -> (TipoAutoVettura -> Bool) -> Bool
+controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione = and (_controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione)
 --------------------------------------------------------------------------------
---- Versione con foldr 
---controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione = foldr (\s acc -> if (acc && ((quantiHanno (map (\x -> tipoDatoId x tipiautovetture) (map (\s -> read s ::Int) (take numAutoCons seqAuto))) condizione) <= nonPiuDiN)) then True else False) True seqAuto
---- Versione con All
-controllo tipiautovetture seqAuto numAutoCons nonPiuDiN condizione = all (\s ->((quantiHanno (map (\x -> tipoDatoId x tipiautovetture) (map (\s -> read s ::Int) (take numAutoCons seqAuto))) condizione) <= nonPiuDiN)) seqAuto
 
-uniq lista = foldr(\l acc -> if (elem l acc) then acc else l:acc)[] lista 
+uniq :: (Foldable t, Eq a) => t a -> [a]
+uniq lista   = foldr(\l acc -> if (elem l acc) then acc else l:acc)[] lista 
+
+conta :: (Foldable t, Num b) => Int -> t String -> b
 conta id seq = foldr (\l acc -> if (read l ::Int) == id then acc+1 else acc) 0 seq
 
---controllonum tipiautovetture qot = foldr (\q acc -> if ((num q) <= (numRichiesto (tipoDatoId (idd q) tipiautovetture))) then True else False) True qot
+controllonum :: Foldable t => [TipoAutoVettura] -> t QuantiOgniTipo -> Bool
 controllonum tipiautovetture qot = all (\q -> if ((num q) <= (numRichiesto (tipoDatoId (idd q) tipiautovetture))) then True else False) qot
 
+main :: IO ()
 main = do 
     -- Prendiamo diversi tipi
     inpStr <- readFile "richiesteAuto.txt"
