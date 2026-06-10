@@ -7,9 +7,11 @@ parse str = let [a,b,c] = words str
             in Ram a (read b :: Int) (read c :: Int)
 
 vienedominata :: Ram -> Ram -> Bool
-vienedominata r r2 = (tempAccesso r > tempAccesso r2 && costoDollari r > costoDollari r2)
-
-
+vienedominata a b 
+                | (tempAccesso b)  <=  (tempAccesso a)   &&  (costoDollari b) <  (costoDollari a)  = True 
+                | (costoDollari b) <=  (costoDollari a)  &&  (tempAccesso b)  <  (tempAccesso a)   = True 
+                | otherwise                                                                        = False 
+                
 --_nonvienemaidominata r1 [] = [True] 
 --_nonvienemaidominata r1 (r:rs) 
 --                            | vienedominata r1 r = False:_nonvienemaidominata r1 rs
