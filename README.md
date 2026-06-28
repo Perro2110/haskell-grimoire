@@ -3,6 +3,9 @@
 Riassunto spiegazioni e esempi di codice per i concetti chiave di Haskell.
 Codice completo presente in conoscenze.hs
 
+> [TIP]
+> Si consiglia di leggere il file `conoscenze.hs` per vedere il codice completo e funzionante, mentre questo file `README.md` contiene spiegazioni e frammenti di codice.
+
 ---
 
 ## 1. Funzioni di Base
