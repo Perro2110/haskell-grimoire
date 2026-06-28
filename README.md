@@ -767,3 +767,7 @@ Haskell è un linguaggio funzionale puro dove:
   - I tipi algebrici (data) modellano strutture ricorsive come alberi ed espressioni
   - I numeri di Peano mostrano come l'aritmetica possa derivare dalla struttura
 ```
+
+> [!CAUTION]
+> si noti tutto è stato scritto da zero, e poi rielaborato attraverso uso di LLM
+
