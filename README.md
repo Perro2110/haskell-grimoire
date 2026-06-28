@@ -509,6 +509,8 @@ La lista `hamming` si definisce **in termini di se stessa**: è possibile perch�
 
 **Eager vs lazy**: nella valutazione eager ogni espressione viene calcolata subito; in quella lazy viene creato un "thunk" (promessa di calcolo) che viene forzato solo quando necessario. Il vantaggio è poter lavorare con strutture infinite; lo svantaggio è un overhead di memoria se i thunk si accumulano senza essere consumati.
 
+> [!IMPORTANT]
+> si noti che foldr può lavorare con liste infinite se la funzione combinatrice è **non-strict** (cioè non valuta subito il secondo argomento). Ad esempio, `foldr (&&) True` può terminare su una lista infinita di `False` senza scorrere tutta la lista.
 ---
 
 ## 19. Rimozione di Duplicati
